@@ -52,6 +52,9 @@
               "includePaths": [
                 "src/styles"
               ]
+            },
+            "optimization": {
+              "fonts": false
             }
           },
           "configurations": {

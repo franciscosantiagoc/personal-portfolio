@@ -1,4 +1,5 @@
 // Reset base minimo
+@use '../abstracts' as *;
 
 *,
 *::before,
@@ -11,17 +12,21 @@ body {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
   background-color: var(--ui-color-bg);
   color: var(--ui-color-text);
-  font-family:
-    'Inter',
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
+  font-family: $font-body;
   -webkit-font-smoothing: antialiased;
   transition:
     background-color 0.2s ease,

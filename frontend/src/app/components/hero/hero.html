@@ -1,0 +1,72 @@
+<section id="inicio" class="hero" aria-label="Presentacion">
+  <!-- Fondo: foto de portada (placeholder) + velos -->
+  <div class="hero__media">
+    <img
+      class="hero__media-img"
+      src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=1600&h=1000&fit=crop&auto=format"
+      srcset="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=800&h=600&fit=crop&auto=format 800w, https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=1600&h=1000&fit=crop&auto=format 1600w"
+      sizes="100vw"
+      alt=""
+      fetchpriority="high"
+    />
+    <span class="hero__scrim"></span>
+    <span class="hero__scrim hero__scrim--side"></span>
+    <span class="hero__scrim hero__scrim--bottom"></span>
+  </div>
+
+  <div class="hero__inner">
+    <div class="hero__content">
+      <p class="hero__eyebrow">
+        <span class="hero__eyebrow-line"></span>
+        Adobe Experience Manager Specialist
+      </p>
+
+      <p class="hero__role">Front-End Developer</p>
+
+      <h1 class="hero__name">
+        Francisco<br />
+        <span class="hero__name-accent">Santiago</span>
+      </h1>
+
+      <span class="hero__bar"></span>
+
+      <p class="hero__bio">
+        Más de 5 años como desarrollador frontend, los últimos 4
+        especializado en Adobe Experience Manager. Construyo
+        interfaces rápidas y accesibles, con componentes AEM
+        (HTL/Sightly) y servicios OSGi en Java.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#proyectos">
+          Ver proyectos
+          <fa-icon icon="arrow-right" />
+        </a>
+        <a class="btn btn--outline" href="#contacto">Contactar</a>
+      </div>
+
+      @if (isAvailableForWork) {
+        <p class="hero__status">
+          <span class="hero__status-dot"></span>
+          Disponible para nuevas oportunidades · Remoto
+        </p>
+      }
+    </div>
+
+    <!-- Ficha de especialidad flotante (solo escritorio) -->
+    <aside class="hero__badge">
+      <p class="hero__badge-label">Especialidad</p>
+      <ul class="hero__badge-list">
+        @for (item of specialties; track item) {
+          <li><span class="hero__badge-dot"></span>{{ item }}</li>
+        }
+      </ul>
+      @if (isAvailableForWork) {
+        <p class="hero__badge-footer">
+          <span class="hero__status-dot"></span>
+          Disponible
+        </p>
+      }
+    </aside>
+  </div>
+</section>

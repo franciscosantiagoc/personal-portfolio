@@ -25,6 +25,23 @@
     --ui-breakpoint-#{$name}: #{$value};
   }
 
+  // Radio de esquinas (0 = look editorial recto)
+  --ui-radius: 0px;
+
+  // Degradado decorativo del hero: usa brand/accent
+  // del tema activo, sin duplicar por tema
+  --ui-gradient-hero:
+    radial-gradient(
+      60% 100% at 15% 20%,
+      color-mix(in srgb, var(--ui-color-accent) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 90% at 85% 10%,
+      color-mix(in srgb, var(--ui-color-brand) 18%, transparent),
+      transparent 70%
+    );
+
   // Tema claro (default)
   color-scheme: light;
 
