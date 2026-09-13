@@ -1,0 +1,22 @@
+// Breakpoints desktop-first (max-width)
+
+@use 'sass:map';
+
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 991px,
+  'xl': 1024px,
+  'xxl': 1440px,
+) !default;
+
+// Media query max-width por nombre
+@mixin respond($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error "Breakpoint '#{$name}' no existe.";
+  }
+
+  @media (max-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}

@@ -1,0 +1,5 @@
+// Entrada: @use 'abstracts' as *;
+// Expone respond() y $breakpoints.
+// Colores van solo por var(--ui-color-*).
+
+@forward 'breakpoints';

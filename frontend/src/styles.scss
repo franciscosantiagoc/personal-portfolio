@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+// Estilos globales del proyecto
+// Tokens y reset se cargan una vez aqui.
+// Componentes usan 'abstracts' as *;
+// y consumen var(--ui-color-*).
+
+@use 'styles/themes/tokens';
+@use 'styles/base/reset';

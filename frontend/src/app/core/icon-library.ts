@@ -1,0 +1,58 @@
+import {
+  faArrowLeft,
+  faArrowRight,
+  faArrowUp,
+  faBars,
+  faCalendarDays,
+  faCircleCheck,
+  faCircleExclamation,
+  faCircleInfo,
+  faEnvelope,
+  faGraduationCap,
+  faHeart,
+  faLocationDot,
+  faMagnifyingGlass,
+  faMoon,
+  faPhone,
+  faSun,
+  faTriangleExclamation,
+  faUser,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faGithub,
+  faInstagram,
+  faLinkedin,
+  faXTwitter,
+  faYoutube,
+} from '@fortawesome/free-brands-svg-icons';
+
+// Set curado de iconos (mejor para el bundle
+// que cargar el paquete completo). Agregar aqui
+// cualquier icono nuevo que se necesite en el sitio.
+export const appIcons = [
+  faArrowLeft,
+  faArrowRight,
+  faArrowUp,
+  faBars,
+  faCalendarDays,
+  faCircleCheck,
+  faCircleExclamation,
+  faCircleInfo,
+  faEnvelope,
+  faGraduationCap,
+  faHeart,
+  faLocationDot,
+  faMagnifyingGlass,
+  faMoon,
+  faPhone,
+  faSun,
+  faTriangleExclamation,
+  faUser,
+  faXmark,
+  faGithub,
+  faInstagram,
+  faLinkedin,
+  faXTwitter,
+  faYoutube,
+];
