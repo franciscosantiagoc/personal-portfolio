@@ -15,6 +15,7 @@ export class Hero {
   protected readonly specialties: readonly string[] = [
     'AEM Sites',
     'AEM Cloud',
+    'React',
     'Angular',
     'OSGi / Java',
   ];

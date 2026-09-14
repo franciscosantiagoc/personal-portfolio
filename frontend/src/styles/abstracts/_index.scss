@@ -1,6 +1,4 @@
-// Entrada: @use 'abstracts' as *;
-// Expone respond(), $breakpoints y tipografia.
-// Colores van solo por var(--ui-color-*).
+// Entrada: respond(), breakpoints, tipografia
 
 @forward 'breakpoints';
 @forward 'typography';

@@ -1,7 +1,6 @@
 @use '../abstracts' as *;
 
-// Boton base + variantes/tamanos (uso global)
-// Estilo editorial: mono, mayusculas, esquinas rectas
+// Boton global: mono, mayusculas, sin radio
 .btn {
   display: inline-flex;
   align-items: center;

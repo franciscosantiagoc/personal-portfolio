@@ -28,8 +28,7 @@
   // Radio de esquinas (0 = look editorial recto)
   --ui-radius: 0px;
 
-  // Degradado decorativo del hero: usa brand/accent
-  // del tema activo, sin duplicar por tema
+  // Degradado del hero (usa brand/accent activos)
   --ui-gradient-hero:
     radial-gradient(
       60% 100% at 15% 20%,

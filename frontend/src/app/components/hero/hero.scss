@@ -129,6 +129,25 @@
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-bottom: 1.75rem;
+
+    // CTAs apiladas a ancho completo en movil
+    @include respond('sm') {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+
+      .btn--outline {
+        background-color: var(--ui-color-surface-alt);
+        border-color: transparent;
+        color: var(--ui-color-text);
+
+        &:hover:not(:disabled) {
+          background-color: var(--ui-color-border);
+        }
+      }
+    }
   }
 
   &__status {
@@ -152,28 +171,36 @@
     animation: hero-pulse 1.8s ease-in-out infinite;
   }
 
-  // Ficha flotante: solo en pantallas grandes
   &__badge {
-    display: none;
-  }
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 13rem;
+    padding: 1.1rem 1.25rem;
+    background-color: color-mix(
+      in srgb,
+      var(--ui-color-surface) 82%,
+      transparent
+    );
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--ui-color-border);
 
-  @media (min-width: 1200px) {
-    &__badge {
-      display: block;
-      position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-      width: 13rem;
-      padding: 1.1rem 1.25rem;
-      background-color: color-mix(
-        in srgb,
-        var(--ui-color-surface) 82%,
-        transparent
-      );
-      backdrop-filter: blur(6px);
-      border: 1px solid var(--ui-color-border);
+    // Debajo de 1280px: tarjeta en flujo normal
+    @include respond('xxl') {
+      position: static;
+      top: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      max-width: 20rem;
+      margin-top: 2rem;
+    }
+
+    // Debajo de 576px: ancho completo
+    @include respond('sm') {
+      max-width: none;
     }
   }
 
