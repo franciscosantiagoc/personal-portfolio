@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Hero } from '../../components/hero/hero';
+import { About } from '../../components/about/about';
 import { Seo } from '../../core/seo';
 
 // Pagina de inicio: compone las secciones
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Hero],
+  imports: [Hero, About],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

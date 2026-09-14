@@ -1,0 +1,9 @@
+@if (icon(); as ic) {
+  @if (ic.type === 'fa') {
+    <fa-icon class="tech-icon" [icon]="[ic.prefix, ic.name]" />
+  } @else {
+    <svg class="tech-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path [attr.d]="ic.path" />
+    </svg>
+  }
+}

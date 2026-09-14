@@ -1,0 +1,53 @@
+<section id="acerca" class="about" aria-label="Acerca de mi">
+  <div class="about__inner">
+    <p class="about__eyebrow">
+      <span class="about__eyebrow-line"></span>
+      Acerca de mi
+    </p>
+
+    <h2 class="about__title">Quien soy</h2>
+
+    <div class="about__bio">
+      <p>
+        Soy desarrollador frontend autodidacta, especializado en combinar Adobe Experience Manager
+        con React y TypeScript para sitios de nivel empresarial. Ese camino lo empecé por cuenta
+        propia y hoy soy Adobe Certified Professional — AEM Sites Developer.
+      </p>
+      <p>
+        Cuando el trabajo del día no alcanza, con ayuda de mi experiencia y la IA construyo mis
+        propias herramientas para facilitar el desarrollo: una extensión de VS Code para acelerar el
+        desarrollo en AEM y una guía técnica interactiva mientras continúo capacitándome en temas de
+        AEM y frontend.
+      </p>
+    </div>
+
+    <!-- Soft skills: una tarjeta por habilidad -->
+    <div class="about__soft-skills">
+      @for (skill of softSkills; track skill.name) {
+        <div class="about__soft-skill">
+          <span class="about__soft-skill-icon">
+            <fa-icon [icon]="skill.icon" />
+          </span>
+          <p class="about__soft-skill-label">{{ skill.name }}</p>
+        </div>
+      }
+    </div>
+
+    <!-- Hero stack: tecnologias por categoria -->
+    <div class="about__stack">
+      @for (group of stackGroups; track group.label) {
+        <div class="about__stack-group">
+          <p class="about__stack-label">{{ group.label }}</p>
+          <ul class="about__stack-list">
+            @for (tech of group.items; track tech.name) {
+              <li class="about__stack-item">
+                <app-tech-icon class="about__stack-icon" [icon]="tech.icon" />
+                {{ tech.name }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>
