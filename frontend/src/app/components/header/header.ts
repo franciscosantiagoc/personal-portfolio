@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  OnInit,
   PLATFORM_ID,
   inject,
   signal,
@@ -28,7 +29,7 @@ const THEME_STORAGE_KEY = 'fs-theme';
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Header {
+export class Header implements OnInit {
   private readonly router = inject(Router);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
@@ -42,11 +43,26 @@ export class Header {
     { label: 'Experiencia', id: 'experiencia' },
   ];
 
+  // Seccion actualmente activa en la visualizacion
+  protected readonly activeSection = signal<string>('inicio');
+
   // Tema activo: preferencia guardada o la del sistema operativo
   protected readonly theme = signal<Theme>(this.readInitialTheme());
 
   // Estado del menu movil (cerrado por defecto)
   protected readonly isMenuOpen = signal(false);
+
+  ngOnInit(): void {
+    if (this.isBrowser) {
+      this.updateActiveSection();
+    }
+  }
+
+  // Detecta el scroll para actualizar la seccion
+  @HostListener('window:scroll')
+  protected onWindowScroll(): void {
+    this.updateActiveSection();
+  }
 
   // Abre o cierra el menu movil
   protected toggleMenu(): void {
@@ -81,6 +97,7 @@ export class Header {
   protected scrollToSection(id: string, event: Event): void {
     event.preventDefault();
     this.closeMenu();
+    this.activeSection.set(id);
 
     if (this.router.url === '/') {
       this.scrollToId(id);
@@ -91,6 +108,53 @@ export class Header {
     this.router.navigateByUrl('/').then(() => {
       requestAnimationFrame(() => this.scrollToId(id));
     });
+  }
+
+  // Determina que seccion esta en el viewport
+  private updateActiveSection(): void {
+    if (!this.isBrowser || this.router.url !== '/') {
+      return;
+    }
+
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    // Si esta al inicio del documento
+    if (scrollY < 80) {
+      this.activeSection.set('inicio');
+      return;
+    }
+
+    const ids = this.navLinks.map((l) => l.id);
+
+    // Si esta al fondo absoluto del documento
+    if (clientHeight + scrollY >= scrollHeight - 40) {
+      const last = ids
+        .slice()
+        .reverse()
+        .find((id) => document.getElementById(id));
+      if (last) {
+        this.activeSection.set(last);
+        return;
+      }
+    }
+
+    // Umbral de lectura debajo del header
+    const threshold = 180;
+    let current = 'inicio';
+
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= threshold) {
+          current = id;
+        }
+      }
+    }
+
+    this.activeSection.set(current);
   }
 
   private scrollToId(id: string): void {

@@ -73,6 +73,8 @@
   }
 
   &__nav-link {
+    position: relative;
+    padding-block: 0.35rem;
     font-family: $font-mono;
     font-size: 0.72rem;
     font-weight: 500;
@@ -82,8 +84,29 @@
     color: var(--ui-color-text-secondary);
     transition: color 0.15s ease;
 
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      inset-block-end: -2px;
+      height: 2px;
+      background-color: var(--ui-color-brand);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.2s ease;
+    }
+
     &:hover {
       color: var(--ui-color-brand);
+    }
+
+    &--active {
+      color: var(--ui-color-brand);
+      font-weight: 700;
+
+      &::after {
+        transform: scaleX(1);
+      }
     }
   }
 
@@ -174,6 +197,16 @@
     text-decoration: none;
     color: var(--ui-color-text);
     border-bottom: 1px solid var(--ui-color-border);
+    transition:
+      color 0.15s ease,
+      padding 0.15s ease;
+
+    &--active {
+      color: var(--ui-color-brand);
+      font-weight: 700;
+      padding-inline-start: 0.75rem;
+      border-inline-start: 3px solid var(--ui-color-brand);
+    }
   }
 
   &__mobile-cta {

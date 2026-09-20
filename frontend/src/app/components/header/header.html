@@ -19,6 +19,7 @@
           <li>
             <a
               class="header__nav-link"
+              [class.header__nav-link--active]="activeSection() === link.id"
               [href]="'/#' + link.id"
               (click)="scrollToSection(link.id, $event)"
             >
@@ -70,6 +71,7 @@
         <li>
           <a
             class="header__mobile-link"
+            [class.header__mobile-link--active]="activeSection() === link.id"
             [href]="'/#' + link.id"
             (click)="scrollToSection(link.id, $event)"
           >
