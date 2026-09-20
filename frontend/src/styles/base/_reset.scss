@@ -14,6 +14,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--ui-header-height);
 }
 
 @media (prefers-reduced-motion: reduce) {

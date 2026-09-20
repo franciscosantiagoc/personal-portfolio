@@ -1,0 +1,90 @@
+<header class="header">
+  <div class="header__inner">
+    <a class="header__brand" routerLink="/" (click)="scrollToSection('inicio', $event)">
+      <img
+        class="header__logo"
+        src="logo-mark.png"
+        width="200"
+        height="200"
+        alt=""
+      />
+      <span class="header__brand-text">
+        Francisco <span class="header__brand-accent">Santiago</span>
+      </span>
+    </a>
+
+    <nav class="header__nav" aria-label="Principal">
+      <ul class="header__nav-list">
+        @for (link of navLinks; track link.id) {
+          <li>
+            <a
+              class="header__nav-link"
+              [href]="'/#' + link.id"
+              (click)="scrollToSection(link.id, $event)"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <a
+      class="btn btn--primary btn--sm header__cta"
+      href="/#contacto"
+      (click)="scrollToSection('contacto', $event)"
+    >
+      Contactar
+    </a>
+
+    <button
+      type="button"
+      class="header__theme-toggle"
+      [attr.aria-label]="theme() === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'"
+      (click)="toggleTheme()"
+    >
+      <fa-icon [icon]="theme() === 'light' ? 'moon' : 'sun'" />
+    </button>
+
+    <button
+      type="button"
+      class="header__toggle"
+      [attr.aria-expanded]="isMenuOpen()"
+      aria-controls="header-mobile-menu"
+      [attr.aria-label]="isMenuOpen() ? 'Cerrar menu' : 'Abrir menu'"
+      (click)="toggleMenu()"
+    >
+      <fa-icon [icon]="isMenuOpen() ? 'xmark' : 'bars'" />
+    </button>
+  </div>
+
+  <!-- Menu movil desplegable -->
+  <nav
+    id="header-mobile-menu"
+    class="header__mobile"
+    [class.header__mobile--open]="isMenuOpen()"
+    aria-label="Principal (movil)"
+  >
+    <ul class="header__mobile-list">
+      @for (link of navLinks; track link.id) {
+        <li>
+          <a
+            class="header__mobile-link"
+            [href]="'/#' + link.id"
+            (click)="scrollToSection(link.id, $event)"
+          >
+            {{ link.label }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <a
+      class="btn btn--primary header__mobile-cta"
+      href="/#contacto"
+      (click)="scrollToSection('contacto', $event)"
+    >
+      Contactar
+    </a>
+  </nav>
+</header>

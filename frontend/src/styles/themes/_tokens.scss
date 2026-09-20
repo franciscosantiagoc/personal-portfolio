@@ -28,6 +28,9 @@
   // Radio de esquinas (0 = look editorial recto)
   --ui-radius: 0px;
 
+  // Alto del header fijo (usado en scroll-padding-top)
+  --ui-header-height: 4.5rem;
+
   // Degradado del hero (usa brand/accent activos)
   --ui-gradient-hero:
     radial-gradient(
