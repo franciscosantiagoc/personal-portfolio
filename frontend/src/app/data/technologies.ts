@@ -209,6 +209,7 @@ export const technologies: readonly Technology[] = [
   { name: 'Node.js', icon: fa('fab', 'node-js'), category: 'backend' },
   { name: 'Spring Boot', icon: springBootIcon, category: 'backend' },
   { name: 'JPA', icon: fa('fas', 'table-cells'), category: 'backend' },
+  { name: 'PHP', icon: fa('fab', 'php'), category: 'backend' },
   { name: 'MySQL', icon: fa('fas', 'database'), category: 'backend' },
   {
     name: 'APIs REST',

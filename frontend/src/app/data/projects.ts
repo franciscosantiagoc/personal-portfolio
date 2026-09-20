@@ -45,7 +45,7 @@ export const projects: readonly Project[] = [
       'Aplicacion web Single Page orientada al comercio electronico. Permite registro y gestion de usuarios, catalogo conectado a la API de Mercado Libre, carrito de compras dinamico y procesamiento seguro de pagos mediante Stripe y Mercado Pago.',
     technologies: ['React', 'Node.js', 'APIs REST', 'MySQL', 'JavaScript', 'HTML5', 'Sass / SCSS'],
     repoUrl: 'https://github.com/franciscosantiagoc/techcommerce_pf',
-    demoUrl: 'https://www.techcommerce.franciscosantiagoc.com/',
+    //demoUrl: 'https://www.techcommerce.franciscosantiagoc.com/',
     videoUrl:
       'https://www.linkedin.com/posts/franciscosantiagoc_que-tal-gente-les-queria-compartir-mi-proyecto-activity-6899539928766652416-HWRp',
     featured: false,
@@ -77,8 +77,16 @@ export const projects: readonly Project[] = [
     shortDescription:
       'Plataforma web institucional para seguimiento academico y deteccion temprana de desercion escolar.',
     fullDescription:
-      'Sistema web para la gestion integral de actividades y expedientes del programa de tutorias en el Instituto Tecnologico del Istmo, disenado para apoyar a docentes y tutores en la deteccion temprana del riesgo de abandono escolar.',
-    technologies: ['HTML5', 'Bootstrap', 'JavaScript', 'MySQL'],
+      'Sistema web desarrollado bajo el patron arquitectonico Modelo-Vista-Controlador (MVC) con PHP nativo y base de datos relacional MySQL. Implementa dinamismo con jQuery y Bootstrap para la administracion integral de tutorias, expedientes estudiantiles y reportes academicos en el Instituto Tecnologico del Istmo para la deteccion temprana del riesgo de abandono escolar.',
+    technologies: [
+      'PHP',
+      'MySQL',
+      'MVC',
+      'jQuery',
+      'HTML5',
+      'Bootstrap',
+      'JavaScript',
+    ],
     featured: false,
   },
   {

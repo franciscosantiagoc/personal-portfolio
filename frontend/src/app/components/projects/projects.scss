@@ -1,0 +1,203 @@
+@use 'abstracts' as *;
+
+// Contenedor general de la seccion proyectos
+.projects {
+  border-bottom: 1px solid var(--ui-color-border);
+  background-color: var(--ui-color-surface-alt);
+
+  &__inner {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 6rem 1.5rem;
+
+    @include respond('md') {
+      padding: 4rem 1.25rem;
+    }
+  }
+
+  &__header {
+    margin-bottom: 3rem;
+  }
+
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ui-color-brand);
+  }
+
+  &__eyebrow-line {
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background-color: var(--ui-color-brand);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    font-family: $font-display;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    color: var(--ui-color-text);
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 44rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ui-color-text-secondary);
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--ui-color-border);
+
+    @include respond('md') {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__tab {
+    padding: 0.55rem 0.95rem;
+    background-color: var(--ui-color-surface);
+    border: 1px solid var(--ui-color-border);
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ui-color-text-secondary);
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-text);
+    }
+
+    &--active {
+      background-color: var(--ui-color-brand);
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-text-inverse);
+
+      &:hover {
+        color: var(--ui-color-text-inverse);
+      }
+    }
+  }
+
+  &__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 280px;
+
+    @include respond('sm') {
+      min-width: 100%;
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    inset-inline-start: 0.85rem;
+    color: var(--ui-color-text-muted);
+    font-size: 0.75rem;
+    pointer-events: none;
+  }
+
+  &__search-input {
+    width: 100%;
+    padding: 0.55rem 2rem 0.55rem 2.2rem;
+    background-color: var(--ui-color-surface);
+    border: 1px solid var(--ui-color-border-strong);
+    color: var(--ui-color-text);
+    font-family: inherit;
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.15s ease;
+
+    &::placeholder {
+      color: var(--ui-color-text-muted);
+      font-size: 0.76rem;
+    }
+
+    &:focus {
+      border-color: var(--ui-color-brand);
+      box-shadow: 0 0 0 2px var(--ui-color-focus-ring);
+    }
+  }
+
+  &__search-clear {
+    position: absolute;
+    inset-inline-end: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--ui-color-text-muted);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--ui-color-text);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    @include respond('xl') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond('sm') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 1rem;
+    text-align: center;
+    background-color: var(--ui-color-surface);
+    border: 1px dashed var(--ui-color-border-strong);
+  }
+
+  &__empty-text {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ui-color-text-secondary);
+  }
+}

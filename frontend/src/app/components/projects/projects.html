@@ -1,0 +1,101 @@
+<section id="proyectos" class="projects" aria-label="Proyectos destacados">
+  <div class="projects__inner">
+    <!-- Encabezado de seccion con numeracion -->
+    <div class="projects__header">
+      <p class="projects__eyebrow">
+        <span class="projects__eyebrow-line"></span>
+        03 / Proyectos
+      </p>
+
+      <h2 class="projects__title">Proyectos</h2>
+
+      <p class="projects__subtitle">
+        Proyectos y aplicaciones web construidas.
+      </p>
+    </div>
+
+    <!-- Barra de control: categorias y buscador reactivo -->
+    <div class="projects__controls">
+      <div class="projects__tabs" role="tablist">
+        @for (tab of categoryTabs; track tab.id) {
+          <button
+            type="button"
+            class="projects__tab"
+            [class.projects__tab--active]="activeCategory() === tab.id"
+            (click)="selectCategory(tab.id)"
+            role="tab"
+            [attr.aria-selected]="activeCategory() === tab.id"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <div class="projects__search">
+        <fa-icon class="projects__search-icon" icon="magnifying-glass" />
+        <input
+          type="search"
+          class="projects__search-input"
+          [value]="searchTerm()"
+          (input)="onSearchInput($event)"
+          placeholder="Buscar por nombre o tecnologia..."
+          aria-label="Buscar proyectos por nombre o tecnologia"
+        />
+        @if (searchTerm()) {
+          <button
+            type="button"
+            class="projects__search-clear"
+            (click)="clearSearch()"
+            aria-label="Limpiar busqueda"
+          >
+            <fa-icon icon="xmark" />
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Cuadricula de proyectos filtrados y paginados -->
+    @if (filteredProjects().length > 0) {
+      <div class="projects__grid">
+        @for (project of pagedProjects(); track project.id) {
+          <app-project-card
+            [project]="project"
+            (selected)="openProject($event)"
+          />
+        }
+      </div>
+
+      <!-- Paginacion: visible solo si hay mas de 12 proyectos (mas de 1 pagina) -->
+      @if (totalPages() > 1) {
+        <app-pagination
+          [currentPage]="currentPage()"
+          [totalPages]="totalPages()"
+          [totalItems]="filteredProjects().length"
+          [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)"
+        />
+      }
+    } @else {
+      <div class="projects__empty">
+        <p class="projects__empty-text">
+          No se encontraron proyectos con los filtros actuales.
+        </p>
+        <button
+          type="button"
+          class="btn btn--secondary btn--sm"
+          (click)="selectCategory('all'); clearSearch()"
+        >
+          Restablecer filtros
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Modal accesible de detalle para el proyecto activo -->
+  @if (selectedProject()) {
+    <app-project-modal
+      [project]="selectedProject()!"
+      (close)="closeProject()"
+    />
+  }
+</section>
