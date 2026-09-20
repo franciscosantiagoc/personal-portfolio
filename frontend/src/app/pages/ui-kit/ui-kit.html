@@ -1,0 +1,190 @@
+<div class="ui-kit">
+  <header class="ui-kit__header">
+    <div class="ui-kit__header-text">
+      <h1 class="ui-kit__title">UI Kit</h1>
+      <p class="ui-kit__subtitle">
+        Guia viva de componentes y estilos base del portafolio.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn--outline"
+      (click)="toggleTheme()"
+    >
+      Tema: {{ theme() === 'light' ? 'Claro' : 'Oscuro' }}
+    </button>
+  </header>
+
+  <!-- Colores -->
+  <section class="ui-kit__section">
+    <h2 class="ui-kit__section-title">Colores</h2>
+
+    @for (group of colorGroups; track group.name) {
+      <h3 class="ui-kit__group-title">{{ group.name }}</h3>
+      <div class="ui-kit__swatches">
+        @for (token of group.tokens; track token) {
+          <div class="swatch">
+            <span
+              class="swatch__preview"
+              [style.background-color]="'var(--ui-color-' + token + ')'"
+            ></span>
+            <span class="swatch__label">--ui-color-{{ token }}</span>
+          </div>
+        }
+      </div>
+    }
+  </section>
+
+  <!-- Botones -->
+  <section class="ui-kit__section">
+    <h2 class="ui-kit__section-title">Botones</h2>
+
+    <div class="ui-kit__row">
+      @for (variant of buttonVariants; track variant) {
+        <button type="button" class="btn btn--{{ variant }}">
+          {{ variant }}
+        </button>
+      }
+    </div>
+
+    <div class="ui-kit__row">
+      <button type="button" class="btn btn--primary btn--sm">Pequeno</button>
+      <button type="button" class="btn btn--primary">Mediano</button>
+      <button type="button" class="btn btn--primary btn--lg">Grande</button>
+      <button type="button" class="btn btn--primary" disabled>
+        Deshabilitado
+      </button>
+    </div>
+  </section>
+
+  <!-- Iconos -->
+  <section class="ui-kit__section">
+    <h2 class="ui-kit__section-title">Iconos</h2>
+    <p class="ui-kit__hint">
+      Font Awesome Free (SVG), registrados en
+      src/app/core/icon-library.ts
+    </p>
+
+    @for (group of iconGroups; track group.name) {
+      <h3 class="ui-kit__group-title">{{ group.name }}</h3>
+      <div class="icon-grid">
+        @for (name of group.icons; track name) {
+          <div class="icon-grid__item">
+            <fa-icon [icon]="name" size="lg" />
+            <span class="icon-grid__label">{{ name }}</span>
+          </div>
+        }
+      </div>
+    }
+
+    <h3 class="ui-kit__group-title">Redes sociales</h3>
+    <div class="icon-grid">
+      @for (name of socialIcons; track name) {
+        <div class="icon-grid__item">
+          <fa-icon [icon]="['fab', name]" size="lg" />
+          <span class="icon-grid__label">{{ name }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Cards -->
+  <section class="ui-kit__section">
+    <h2 class="ui-kit__section-title">Cards</h2>
+
+    <div class="ui-kit__row ui-kit__row--wrap">
+      <article class="card">
+        <h3 class="card__title">Card simple</h3>
+        <p class="card__text">
+          Contenido de ejemplo para una tarjeta generica.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge badge--brand">Proyecto</span>
+        <h3 class="card__title">Card de proyecto</h3>
+        <p class="card__text">
+          Descripcion corta del proyecto y tecnologias usadas.
+        </p>
+        <a class="card__link" href="#">Ver mas &rarr;</a>
+      </article>
+
+      <article class="card card--elevated">
+        <h3 class="card__title">Card elevada</h3>
+        <p class="card__text">
+          Variante con superficie alternativa y mas sombra.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Linea de tiempo -->
+  <section class="ui-kit__section">
+    <h2 class="ui-kit__section-title">Linea de tiempo</h2>
+
+    <ol class="timeline">
+      @for (item of timelineItems; track item.title) {
+        <li class="timeline__item">
+          <span class="timeline__dot"></span>
+          <div class="timeline__content">
+            <span class="timeline__date">{{ item.date }}</span>
+            <h3 class="timeline__title">{{ item.title }}</h3>
+            <p class="timeline__text">{{ item.description }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- Carousel -->
+  <section class="ui-kit__section">
+    <h2 class="ui-kit__section-title">Carousel</h2>
+
+    <div class="carousel">
+      <div class="carousel__viewport">
+        <div
+          class="carousel__track"
+          [style.transform]="'translateX(-' + activeSlide() * 100 + '%)'"
+        >
+          @for (slide of slides; track slide.title) {
+            <div class="carousel__slide">
+              <h3 class="carousel__slide-title">{{ slide.title }}</h3>
+              <p class="carousel__slide-text">{{ slide.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="carousel__control carousel__control--prev"
+        (click)="prevSlide()"
+        aria-label="Anterior"
+      >
+        <fa-icon icon="arrow-left" />
+      </button>
+
+      <button
+        type="button"
+        class="carousel__control carousel__control--next"
+        (click)="nextSlide()"
+        aria-label="Siguiente"
+      >
+        <fa-icon icon="arrow-right" />
+      </button>
+
+      <div class="carousel__dots">
+        @for (slide of slides; track slide.title; let i = $index) {
+          <button
+            type="button"
+            class="carousel__dot"
+            [class.carousel__dot--active]="i === activeSlide()"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Ir a la diapositiva ' + (i + 1)"
+          ></button>
+        }
+      </div>
+    </div>
+  </section>
+</div>

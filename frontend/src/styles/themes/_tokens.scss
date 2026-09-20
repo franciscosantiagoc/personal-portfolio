@@ -1,0 +1,157 @@
+// Tokens de tema: colores via CSS vars
+// Breakpoints via SCSS (build time)
+//
+// Paleta claro: referencia visual "Bengar"
+// (celeste vivo + azul marino).
+// Paleta oscuro: referencia visual
+// "Domain Monitoring" (turquesa sobre marino).
+//
+// Estados de tema:
+// 1) Sin atributo -> claro (default)
+// 2) SO en oscuro -> oscuro (auto)
+// 3) [data-theme="dark"] -> oscuro forzado
+// 4) [data-theme="light"] -> claro forzado
+//
+// Toggle: document.documentElement
+//   .setAttribute('data-theme', 'dark')
+
+@use 'sass:map';
+@use '../abstracts/breakpoints' as bp;
+@use '../abstracts/colors' as c;
+
+:root {
+  // Breakpoints como custom properties
+  @each $name, $value in bp.$breakpoints {
+    --ui-breakpoint-#{$name}: #{$value};
+  }
+
+  // Radio de esquinas (0 = look editorial recto)
+  --ui-radius: 0px;
+
+  // Alto del header fijo (usado en scroll-padding-top)
+  --ui-header-height: 4.5rem;
+
+  // Degradado del hero (usa brand/accent activos)
+  --ui-gradient-hero:
+    radial-gradient(
+      60% 100% at 15% 20%,
+      color-mix(in srgb, var(--ui-color-accent) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 90% at 85% 10%,
+      color-mix(in srgb, var(--ui-color-brand) 18%, transparent),
+      transparent 70%
+    );
+
+  // Tema claro (default)
+  color-scheme: light;
+
+  --ui-color-bg: #{map.get(c.$sky, 100)};
+  --ui-color-bg-elevated: #{map.get(c.$sky, 200)};
+  --ui-color-surface: #ffffff;
+  --ui-color-surface-alt: #{map.get(c.$sky, 50)};
+  --ui-color-border: rgba(18, 58, 92, 0.14);
+  --ui-color-border-strong: rgba(18, 58, 92, 0.28);
+
+  --ui-color-text: #{map.get(c.$neutral, 900)};
+  --ui-color-text-secondary: #{map.get(c.$navy, 700)};
+  --ui-color-text-muted: #4b6cb7;
+  --ui-color-text-inverse: #ffffff;
+
+  --ui-color-brand: #{map.get(c.$navy, 700)};
+  --ui-color-brand-hover: #{map.get(c.$navy, 800)};
+  --ui-color-brand-contrast: #ffffff;
+  --ui-color-brand-soft: #{map.get(c.$sky, 200)};
+
+  --ui-color-accent: #{map.get(c.$sky, 500)};
+  --ui-color-accent-soft: #{map.get(c.$sky, 100)};
+
+  --ui-color-link: var(--ui-color-brand);
+  --ui-color-link-hover: var(--ui-color-brand-hover);
+
+  --ui-color-success: #{map.get(c.$success, 500)};
+  --ui-color-success-soft: #{map.get(c.$success, 100)};
+  --ui-color-warning: #{map.get(c.$warning, 500)};
+  --ui-color-warning-soft: #{map.get(c.$warning, 100)};
+  --ui-color-danger: #{map.get(c.$danger, 500)};
+  --ui-color-danger-soft: #{map.get(c.$danger, 100)};
+  --ui-color-info: #{map.get(c.$info, 500)};
+  --ui-color-info-soft: #{map.get(c.$info, 100)};
+
+  --ui-color-focus-ring: rgba(18, 58, 92, 0.35);
+  --ui-color-shadow: rgb(15 23 42 / 8%);
+  --ui-color-overlay: rgb(15 23 42 / 60%);
+}
+
+// Tema oscuro por preferencia del SO
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --ui-color-bg: #{map.get(c.$ink, 950)};
+    --ui-color-bg-elevated: #{map.get(c.$ink, 900)};
+    --ui-color-surface: #{map.get(c.$ink, 850)};
+    --ui-color-surface-alt: #{map.get(c.$ink, 800)};
+    --ui-color-border: rgba(34, 211, 238, 0.16);
+    --ui-color-border-strong: rgba(34, 211, 238, 0.32);
+
+    --ui-color-text: #{map.get(c.$ink, 50)};
+    --ui-color-text-secondary: #{map.get(c.$ink, 200)};
+    --ui-color-text-muted: #{map.get(c.$ink, 400)};
+    --ui-color-text-inverse: #ffffff;
+
+    --ui-color-brand: #{map.get(c.$teal, 500)};
+    --ui-color-brand-hover: #{map.get(c.$teal, 600)};
+    --ui-color-brand-contrast: #{map.get(c.$ink, 950)};
+    --ui-color-brand-soft: rgba(34, 211, 238, 0.14);
+
+    --ui-color-accent: #{map.get(c.$teal, 400)};
+    --ui-color-accent-soft: rgba(56, 189, 248, 0.14);
+
+    --ui-color-success-soft: rgb(22 163 74 / 16%);
+    --ui-color-warning-soft: rgb(217 119 6 / 16%);
+    --ui-color-danger: #ef4444;
+    --ui-color-danger-soft: rgb(239 68 68 / 16%);
+    --ui-color-info-soft: rgb(37 99 235 / 16%);
+
+    --ui-color-focus-ring: rgba(34, 211, 238, 0.4);
+    --ui-color-shadow: rgb(0 0 0 / 50%);
+    --ui-color-overlay: rgb(0 0 0 / 75%);
+  }
+}
+
+// Tema oscuro forzado (toggle manual)
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --ui-color-bg: #{map.get(c.$ink, 950)};
+  --ui-color-bg-elevated: #{map.get(c.$ink, 900)};
+  --ui-color-surface: #{map.get(c.$ink, 850)};
+  --ui-color-surface-alt: #{map.get(c.$ink, 800)};
+  --ui-color-border: rgba(34, 211, 238, 0.16);
+  --ui-color-border-strong: rgba(34, 211, 238, 0.32);
+
+  --ui-color-text: #{map.get(c.$ink, 50)};
+  --ui-color-text-secondary: #{map.get(c.$ink, 200)};
+  --ui-color-text-muted: #{map.get(c.$ink, 400)};
+  --ui-color-text-inverse: #ffffff;
+
+  --ui-color-brand: #{map.get(c.$teal, 500)};
+  --ui-color-brand-hover: #{map.get(c.$teal, 600)};
+  --ui-color-brand-contrast: #{map.get(c.$ink, 950)};
+  --ui-color-brand-soft: rgba(34, 211, 238, 0.14);
+
+  --ui-color-accent: #{map.get(c.$teal, 400)};
+  --ui-color-accent-soft: rgba(56, 189, 248, 0.14);
+
+  --ui-color-success-soft: rgb(22 163 74 / 16%);
+  --ui-color-warning-soft: rgb(217 119 6 / 16%);
+  --ui-color-danger: #ef4444;
+  --ui-color-danger-soft: rgb(239 68 68 / 16%);
+  --ui-color-info-soft: rgb(37 99 235 / 16%);
+
+  --ui-color-focus-ring: rgba(34, 211, 238, 0.4);
+  --ui-color-shadow: rgb(0 0 0 / 50%);
+  --ui-color-overlay: rgb(0 0 0 / 75%);
+}

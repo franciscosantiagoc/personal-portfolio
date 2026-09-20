@@ -1,0 +1,153 @@
+@use 'abstracts' as *;
+
+// Seccion Acerca de mi: bio + skills + stack
+.about {
+  border-bottom: 1px solid var(--ui-color-border);
+
+  &__inner {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 6rem 1.5rem;
+
+    @include respond('md') {
+      padding: 4rem 1.25rem;
+    }
+  }
+
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ui-color-brand);
+  }
+
+  &__eyebrow-line {
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background-color: var(--ui-color-brand);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    margin: 0 0 2.5rem;
+    font-family: $font-display;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--ui-color-text);
+  }
+
+  &__bio {
+    max-width: 46rem;
+    margin-bottom: 3rem;
+    color: var(--ui-color-text-secondary);
+    line-height: 1.75;
+    font-size: 0.98rem;
+
+    p + p {
+      margin-top: 1.1rem;
+    }
+  }
+
+  &__soft-skills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 4rem;
+
+    // Dos columnas en tablet
+    @include respond('lg') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    // Una columna en movil
+    @include respond('sm') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__soft-skill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.75rem 1rem;
+    text-align: center;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border);
+  }
+
+  &__soft-skill-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--ui-color-brand-soft);
+    color: var(--ui-color-brand);
+    font-size: 1.1rem;
+  }
+
+  &__soft-skill-label {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ui-color-text);
+  }
+
+  &__stack {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--ui-color-border);
+
+    // Columnas apiladas debajo de tablet
+    @include respond('md') {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  &__stack-label {
+    margin: 0 0 1rem;
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ui-color-brand);
+  }
+
+  &__stack-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__stack-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border);
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    color: var(--ui-color-text);
+  }
+
+  &__stack-icon {
+    flex-shrink: 0;
+    color: var(--ui-color-brand);
+  }
+}

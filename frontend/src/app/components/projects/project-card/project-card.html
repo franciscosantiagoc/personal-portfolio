@@ -1,0 +1,89 @@
+<article class="project-card">
+  <!-- Portada con aspect ratio e indicador destacado -->
+  <div class="project-card__media" (click)="onSelect()">
+    <img
+      class="project-card__image"
+      [src]="project().images[0]"
+      [alt]="project().title"
+      loading="lazy"
+      decoding="async"
+    />
+    @if (project().featured) {
+      <span class="project-card__badge">Destacado</span>
+    }
+  </div>
+
+  <!-- Cuerpo de informacion del proyecto -->
+  <div class="project-card__content">
+    <div class="project-card__meta">
+      <span class="project-card__category">{{ project().categoryLabel }}</span>
+      <span class="project-card__year">{{ project().year }}</span>
+    </div>
+
+    <h3 class="project-card__title" (click)="onSelect()">
+      {{ project().title }}
+    </h3>
+
+    <p class="project-card__description">
+      {{ project().shortDescription }}
+    </p>
+
+    <!-- Lista de tecnologias principales -->
+    <div class="project-card__tags">
+      @for (tech of project().technologies; track tech) {
+        <span class="project-card__tag">{{ tech }}</span>
+      }
+    </div>
+
+    <!-- Barra de acciones y accesos directos -->
+    <div class="project-card__actions">
+      <button
+        type="button"
+        class="btn btn--secondary btn--sm project-card__btn-detail"
+        (click)="onSelect()"
+      >
+        Ver detalle
+        <fa-icon icon="arrow-right" />
+      </button>
+
+      <div class="project-card__links">
+        @if (project().repoUrl) {
+          <a
+            class="project-card__link"
+            [href]="project().repoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Repositorio en GitHub"
+            aria-label="Repositorio en GitHub"
+          >
+            <fa-icon [icon]="['fab', 'github']" />
+          </a>
+        }
+        @if (project().demoUrl) {
+          <a
+            class="project-card__link"
+            [href]="project().demoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Sitio web en vivo"
+            aria-label="Sitio web en vivo"
+          >
+            <fa-icon icon="globe" />
+          </a>
+        }
+        @if (project().videoUrl) {
+          <a
+            class="project-card__link"
+            [href]="project().videoUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Video demostrativo"
+            aria-label="Video demostrativo"
+          >
+            <fa-icon icon="play" />
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,48 @@
+@if (totalPages() > 1) {
+  <nav class="pagination" aria-label="Paginacion de proyectos">
+    <!-- Informacion de elementos visibles -->
+    <span class="pagination__info">
+      {{ rangeText() }}
+    </span>
+
+    <!-- Botones de navegacion y numeros de pagina -->
+    <div class="pagination__controls">
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="currentPage() <= 1"
+        (click)="goToPage(currentPage() - 1)"
+        aria-label="Ir a pagina anterior"
+      >
+        <fa-icon icon="arrow-left" />
+        <span>Anterior</span>
+      </button>
+
+      <div class="pagination__pages">
+        @for (page of pages(); track page) {
+          <button
+            type="button"
+            class="pagination__number"
+            [class.pagination__number--active]="currentPage() === page"
+            (click)="goToPage(page)"
+            [attr.aria-current]="currentPage() === page ? 'page' : null"
+            [attr.aria-label]="'Pagina ' + page"
+          >
+            {{ page }}
+          </button>
+        }
+      </div>
+
+      <button
+        type="button"
+        class="pagination__btn"
+        [disabled]="currentPage() >= totalPages()"
+        (click)="goToPage(currentPage() + 1)"
+        aria-label="Ir a pagina siguiente"
+      >
+        <span>Siguiente</span>
+        <fa-icon icon="arrow-right" />
+      </button>
+    </div>
+  </nav>
+}

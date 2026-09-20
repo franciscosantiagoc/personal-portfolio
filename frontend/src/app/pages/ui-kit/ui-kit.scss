@@ -1,0 +1,302 @@
+@use 'abstracts' as *;
+
+// Contenedor general de la pagina
+.ui-kit {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include respond('md') {
+    padding: 2rem 1rem 4rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    margin: 0 0 0.25rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: var(--ui-color-text-secondary);
+  }
+
+  &__section-title {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  &__hint {
+    margin: -0.5rem 0 1rem;
+    font-size: 0.85rem;
+    color: var(--ui-color-text-muted);
+  }
+
+  &__group-title {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ui-color-text-secondary);
+  }
+
+  &__swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    &--wrap {
+      align-items: stretch;
+    }
+  }
+}
+
+// Muestra de color individual
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &__preview {
+    display: block;
+    height: 56px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--ui-color-border);
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    color: var(--ui-color-text-muted);
+    font-family: monospace;
+  }
+}
+
+// Grilla de iconos
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 1rem 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--ui-color-surface);
+    border: 1px solid var(--ui-color-border);
+    color: var(--ui-color-brand);
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    color: var(--ui-color-text-muted);
+    text-align: center;
+    word-break: break-word;
+  }
+}
+
+// Etiqueta pequena tipo chip
+.badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+
+  &--brand {
+    background-color: var(--ui-color-brand-soft);
+    color: var(--ui-color-brand);
+  }
+}
+
+// Tarjeta reutilizable
+.card {
+  flex: 1 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  background-color: var(--ui-color-surface);
+  border: 1px solid var(--ui-color-border);
+  box-shadow: 0 4px 16px var(--ui-color-shadow);
+
+  &--elevated {
+    background-color: var(--ui-color-bg-elevated);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--ui-color-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  &__link {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ui-color-link);
+  }
+}
+
+// Linea de tiempo vertical
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--ui-color-border);
+
+  &__item {
+    position: relative;
+  }
+
+  &__dot {
+    position: absolute;
+    left: -1.94rem;
+    top: 0.2rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--ui-color-brand);
+  }
+
+  &__date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ui-color-brand);
+  }
+
+  &__title {
+    margin: 0.15rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--ui-color-text-secondary);
+    font-size: 0.9rem;
+  }
+}
+
+// Carousel simple con signals
+.carousel {
+  position: relative;
+
+  &__viewport {
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid var(--ui-color-border);
+  }
+
+  &__track {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+
+  &__slide {
+    flex: 0 0 100%;
+    padding: 2.5rem 1.5rem;
+    background-color: var(--ui-color-surface-alt);
+    text-align: center;
+  }
+
+  &__slide-title {
+    margin: 0 0 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  &__slide-text {
+    margin: 0;
+    color: var(--ui-color-text-secondary);
+  }
+
+  &__control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--ui-color-border-strong);
+    background-color: var(--ui-color-surface);
+    color: var(--ui-color-brand);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      background-color: var(--ui-color-brand);
+      color: var(--ui-color-text-inverse);
+    }
+
+    &--prev {
+      left: -0.5rem;
+    }
+
+    &--next {
+      right: -0.5rem;
+    }
+
+    @include respond('sm') {
+      display: none;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--ui-color-border-strong);
+    cursor: pointer;
+
+    &--active {
+      background-color: var(--ui-color-brand);
+    }
+  }
+}

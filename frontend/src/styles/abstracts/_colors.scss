@@ -1,0 +1,80 @@
+// Paleta primitiva (no usar directo)
+// Alimenta los tokens de themes/_tokens.scss
+//
+// $sky / $navy: referencia visual para el tema
+// claro (estilo "Bengar": celeste vivo + marino).
+// $teal / $ink: referencia visual para el tema
+// oscuro (estilo "Domain Monitoring": turquesa
+// sobre azul marino casi negro).
+
+$sky: (
+  50: #eaf6fc,
+  100: #d6f0fa,
+  200: #aee3f5,
+  400: #55c2ea,
+  500: #2ba6de,
+  600: #1f8dc4,
+);
+
+$navy: (
+  600: #1c4a70,
+  700: #123a5c,
+  800: #0f2846,
+  900: #0a2036,
+);
+
+$teal: (
+  400: #38bdf8,
+  500: #22d3ee,
+  600: #06b6d4,
+);
+
+$ink: (
+  50: #eef6fb,
+  200: #b9cbdd,
+  400: #7f93ac,
+  800: #112544,
+  850: #0d1f38,
+  900: #0a1830,
+  950: #071021,
+);
+
+// Escala neutra (texto del tema claro)
+$neutral: (
+  50: #f8fafc,
+  100: #f1f5f9,
+  200: #e2e8f0,
+  300: #cbd5e1,
+  400: #94a3b8,
+  500: #64748b,
+  600: #475569,
+  700: #334155,
+  800: #1e293b,
+  900: #0f172a,
+  950: #0b1220,
+);
+
+// Estados semanticos
+$success: (
+  100: #dcfce7,
+  500: #16a34a,
+  700: #15803d,
+);
+
+$warning: (
+  100: #fef3c7,
+  500: #d97706,
+  700: #b45309,
+);
+
+$danger: (
+  100: #fee2e2,
+  500: #dc2626,
+  700: #b91c1c,
+);
+
+$info: (
+  100: #dbeafe,
+  500: #2563eb,
+  700: #1d4ed8,
+);
