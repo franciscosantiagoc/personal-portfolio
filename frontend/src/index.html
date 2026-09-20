@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>Francisco Santiago — Portafolio</title>
+  <title>Portafolio de Francisco Santiago</title>
   <base href="/" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
@@ -10,9 +10,24 @@
     content="Portafolio de Francisco Santiago: desarrollo frontend, Adobe Experience Manager y arquitecturas headless que escalan."
   />
   <meta name="theme-color" content="#123a5c" />
+
+  <!-- Aplica el tema guardado antes del primer render (evita parpadeo) -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('fs-theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_MX" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
   <!-- Fuentes: Barlow, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
