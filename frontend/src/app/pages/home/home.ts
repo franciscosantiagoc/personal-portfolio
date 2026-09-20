@@ -16,7 +16,7 @@ export class Home {
 
   constructor() {
     this.seo.update({
-      title: 'Francisco Santiago — Frontend Developer & AEM',
+      title: 'Portafolio de Francisco Santiago — Frontend Developer & AEM',
       description:
         'Portafolio de Francisco Santiago: desarrollo frontend ' +
         'y soluciones de Adobe Experience Manager que escalan.',
