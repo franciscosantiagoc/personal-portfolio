@@ -1,0 +1,120 @@
+<div
+  class="project-modal"
+  (click)="onBackdropClick($event)"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'modal-title-' + project().id"
+>
+  <div class="project-modal__dialog">
+    <!-- Boton para cerrar modal -->
+    <button
+      type="button"
+      class="project-modal__close"
+      (click)="close.emit()"
+      aria-label="Cerrar modal"
+    >
+      <fa-icon icon="xmark" />
+    </button>
+
+    <!-- Galeria de imagenes con visor y miniaturas -->
+    <div class="project-modal__gallery">
+      <div class="project-modal__media">
+        <img
+          class="project-modal__image"
+          [src]="project().images[activeIndex()]"
+          [alt]="project().title"
+          loading="lazy"
+        />
+      </div>
+
+      @if (project().images.length > 1) {
+        <div class="project-modal__thumbnails">
+          @for (img of project().images; track img; let idx = $index) {
+            <button
+              type="button"
+              class="project-modal__thumbnail"
+              [class.project-modal__thumbnail--active]="activeIndex() === idx"
+              (click)="selectImage(idx)"
+              [attr.aria-label]="'Ver imagen ' + (idx + 1)"
+            >
+              <img [src]="img" [alt]="project().title + ' preview ' + (idx + 1)" />
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Contenido y descripcion completa -->
+    <div class="project-modal__content">
+      <div class="project-modal__header">
+        <div class="project-modal__meta">
+          <span class="project-modal__category">{{ project().categoryLabel }}</span>
+          <span class="project-modal__year">{{ project().year }}</span>
+        </div>
+        <h2 [id]="'modal-title-' + project().id" class="project-modal__title">
+          {{ project().title }}
+        </h2>
+      </div>
+
+      <div class="project-modal__body">
+        <p class="project-modal__description">
+          {{ project().fullDescription }}
+        </p>
+
+        <!-- Tecnologias empleadas -->
+        <div class="project-modal__section">
+          <p class="project-modal__section-title">Tecnologias utilizadas</p>
+          <div class="project-modal__tags">
+            @for (tech of project().technologies; track tech) {
+              <span class="project-modal__tag">{{ tech }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- Enlaces directos externos -->
+        @if (project().repoUrl || project().demoUrl || project().videoUrl) {
+          <div class="project-modal__actions">
+            @if (project().demoUrl) {
+              <a
+                class="btn btn--primary"
+                [href]="project().demoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <fa-icon icon="globe" />
+                Sitio en vivo
+                <fa-icon icon="arrow-up-right-from-square" />
+              </a>
+            }
+
+            @if (project().repoUrl) {
+              <a
+                class="btn btn--outline"
+                [href]="project().repoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <fa-icon [icon]="['fab', 'github']" />
+                Ver repositorio
+                <fa-icon icon="arrow-up-right-from-square" />
+              </a>
+            }
+
+            @if (project().videoUrl) {
+              <a
+                class="btn btn--secondary"
+                [href]="project().videoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <fa-icon icon="play" />
+                Ver video demostrativo
+                <fa-icon icon="arrow-up-right-from-square" />
+              </a>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
