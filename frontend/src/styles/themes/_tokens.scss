@@ -61,6 +61,7 @@
 
   --ui-color-brand: #{map.get(c.$navy, 700)};
   --ui-color-brand-hover: #{map.get(c.$navy, 800)};
+  --ui-color-brand-contrast: #ffffff;
   --ui-color-brand-soft: #{map.get(c.$sky, 200)};
 
   --ui-color-accent: #{map.get(c.$sky, 500)};
@@ -102,6 +103,7 @@
 
     --ui-color-brand: #{map.get(c.$teal, 500)};
     --ui-color-brand-hover: #{map.get(c.$teal, 600)};
+    --ui-color-brand-contrast: #{map.get(c.$ink, 950)};
     --ui-color-brand-soft: rgba(34, 211, 238, 0.14);
 
     --ui-color-accent: #{map.get(c.$teal, 400)};
@@ -137,6 +139,7 @@
 
   --ui-color-brand: #{map.get(c.$teal, 500)};
   --ui-color-brand-hover: #{map.get(c.$teal, 600)};
+  --ui-color-brand-contrast: #{map.get(c.$ink, 950)};
   --ui-color-brand-soft: rgba(34, 211, 238, 0.14);
 
   --ui-color-accent: #{map.get(c.$teal, 400)};

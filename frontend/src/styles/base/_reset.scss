@@ -43,11 +43,11 @@ svg {
   max-width: 100%;
 }
 
-a {
+a:not(.btn) {
   color: var(--ui-color-link);
 }
 
-a:hover {
+a:not(.btn):hover {
   color: var(--ui-color-link-hover);
 }
 

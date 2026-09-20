@@ -23,6 +23,10 @@
     border-color 0.15s ease,
     opacity 0.15s ease;
 
+  &:hover {
+    text-decoration: none;
+  }
+
   &:focus-visible {
     outline: 2px solid var(--ui-color-focus-ring);
     outline-offset: 2px;
@@ -36,10 +40,12 @@
 
   &--primary {
     background-color: var(--ui-color-brand);
-    color: var(--ui-color-text-inverse);
+    color: var(--ui-color-brand-contrast);
 
     &:hover:not(:disabled) {
-      opacity: 0.85;
+      background-color: var(--ui-color-brand-hover);
+      color: var(--ui-color-brand-contrast);
+      opacity: 0.95;
     }
   }
 
@@ -49,6 +55,7 @@
 
     &:hover:not(:disabled) {
       background-color: var(--ui-color-border);
+      color: var(--ui-color-text);
     }
   }
 
@@ -60,6 +67,7 @@
     &:hover:not(:disabled) {
       background-color: var(--ui-color-surface-alt);
       border-color: var(--ui-color-brand);
+      color: var(--ui-color-brand);
     }
   }
 
@@ -69,6 +77,7 @@
 
     &:hover:not(:disabled) {
       background-color: var(--ui-color-brand-soft);
+      color: var(--ui-color-brand);
     }
   }
 
@@ -77,6 +86,7 @@
     color: var(--ui-color-text-inverse);
 
     &:hover:not(:disabled) {
+      color: var(--ui-color-text-inverse);
       opacity: 0.85;
     }
   }
