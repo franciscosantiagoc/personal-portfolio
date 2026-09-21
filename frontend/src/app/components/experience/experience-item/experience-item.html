@@ -71,28 +71,36 @@
             }}
           </span>
           <fa-icon
-            [icon]="['fas', isExpanded() ? 'chevron-up' : 'chevron-down']"
+            [icon]="['fas', 'chevron-down']"
             class="exp-item__expand-icon"
+            [class.exp-item__expand-icon--open]="isExpanded()"
           />
         </button>
 
-        @if (isExpanded()) {
-          <ul [id]="'highlights-' + item().id" class="exp-item__highlights-list">
-            @for (highlight of item().highlights; track highlight) {
-              <li
-                class="exp-item__highlight-item"
-                [class.exp-item__highlight-item--cert]="isCertHighlight(highlight)"
-              >
-                @if (isCertHighlight(highlight)) {
-                  <fa-icon [icon]="['fas', 'award']" class="exp-item__cert-icon" />
-                } @else {
-                  <fa-icon [icon]="['fas', 'circle-check']" class="exp-item__check-icon" />
-                }
-                <span>{{ highlight }}</span>
-              </li>
-            }
-          </ul>
-        }
+        <div
+          class="exp-item__highlights-wrapper"
+          [class.exp-item__highlights-wrapper--open]="isExpanded()"
+          [attr.aria-hidden]="!isExpanded()"
+          [inert]="!isExpanded()"
+        >
+          <div class="exp-item__highlights-inner">
+            <ul [id]="'highlights-' + item().id" class="exp-item__highlights-list">
+              @for (highlight of item().highlights; track highlight) {
+                <li
+                  class="exp-item__highlight-item"
+                  [class.exp-item__highlight-item--cert]="isCertHighlight(highlight)"
+                >
+                  @if (isCertHighlight(highlight)) {
+                    <fa-icon [icon]="['fas', 'award']" class="exp-item__cert-icon" />
+                  } @else {
+                    <fa-icon [icon]="['fas', 'circle-check']" class="exp-item__check-icon" />
+                  }
+                  <span>{{ highlight }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
       </div>
     }
 
