@@ -1,0 +1,108 @@
+<article
+  class="exp-item"
+  [class.exp-item--first]="isFirst()"
+  [class.exp-item--current]="item().isCurrent"
+  role="listitem"
+>
+  <!-- Columna lateral izquierda: Periodo y estado -->
+  <div class="exp-item__period-col">
+    <time class="exp-item__period">{{ item().period }}</time>
+    @if (item().isCurrent) {
+      <span class="exp-item__status-pill">
+        <span class="exp-item__pulse-dot"></span>
+        Actual
+      </span>
+    }
+  </div>
+
+  <!-- Columna principal con linea divisoria vertical estilo Figma v2 -->
+  <div class="exp-item__body-col">
+    <div class="exp-item__heading-group">
+      <div class="exp-item__titles">
+        <h3 class="exp-item__role">{{ item().role }}</h3>
+        <div class="exp-item__company-row">
+          <span class="exp-item__company">{{ item().company }}</span>
+          @if (item().location) {
+            <span class="exp-item__separator" aria-hidden="true">·</span>
+            <span class="exp-item__location">
+              <fa-icon [icon]="['fas', 'location-dot']" class="exp-item__location-icon" />
+              {{ item().location }}
+            </span>
+          }
+        </div>
+      </div>
+
+      @if (item().badge) {
+        <span class="exp-item__badge">{{ item().badge }}</span>
+      }
+    </div>
+
+    <!-- Resumen principal del puesto -->
+    <p class="exp-item__desc">{{ item().description }}</p>
+
+    <!-- Proyectos y clientes clave destacados -->
+    @if (showMainProjects() && item().clientProjects && item().clientProjects!.length > 0) {
+      <div class="exp-item__projects">
+        <span class="exp-item__projects-label">Proyectos clave:</span>
+        <div class="exp-item__projects-list">
+          @for (project of item().clientProjects; track project) {
+            <span class="exp-item__project-tag">{{ project }}</span>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Desplegable in-situ de logros y responsabilidades -->
+    @if (item().highlights && item().highlights!.length > 0) {
+      <div class="exp-item__details-section">
+        <button
+          type="button"
+          class="exp-item__expand-btn"
+          [class.exp-item__expand-btn--open]="isExpanded()"
+          (click)="onToggle()"
+          [attr.aria-expanded]="isExpanded()"
+          [attr.aria-controls]="'highlights-' + item().id"
+        >
+          <span>
+            {{
+              isExpanded()
+                ? 'Ocultar responsabilidades clave'
+                : 'Ver responsabilidades y logros (' + item().highlights!.length + ')'
+            }}
+          </span>
+          <fa-icon
+            [icon]="['fas', isExpanded() ? 'chevron-up' : 'chevron-down']"
+            class="exp-item__expand-icon"
+          />
+        </button>
+
+        @if (isExpanded()) {
+          <ul [id]="'highlights-' + item().id" class="exp-item__highlights-list">
+            @for (highlight of item().highlights; track highlight) {
+              <li
+                class="exp-item__highlight-item"
+                [class.exp-item__highlight-item--cert]="isCertHighlight(highlight)"
+              >
+                @if (isCertHighlight(highlight)) {
+                  <fa-icon [icon]="['fas', 'award']" class="exp-item__cert-icon" />
+                } @else {
+                  <fa-icon [icon]="['fas', 'circle-check']" class="exp-item__check-icon" />
+                }
+                <span>{{ highlight }}</span>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    }
+
+    <!-- Nube de tecnologias aplicadas -->
+    @if (item().technologies.length > 0) {
+      <div class="exp-item__tech-list" aria-label="Tecnologias utilizadas">
+        @for (tech of item().technologies; track tech) {
+          <span class="exp-item__tech-tag">{{ tech }}</span>
+        }
+      </div>
+    }
+  </div>
+</article>

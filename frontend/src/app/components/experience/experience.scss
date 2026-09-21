@@ -1,0 +1,99 @@
+@use 'abstracts' as *;
+
+.experience {
+  border-bottom: 1px solid var(--ui-color-border);
+  background-color: var(--ui-color-surface);
+
+  &__inner {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 5rem 1.5rem;
+
+    @include respond('md') {
+      padding: 3.5rem 1.25rem;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+    font: 600 0.7rem $font-mono;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ui-color-brand);
+  }
+
+  &__eyebrow-line {
+    width: 1.5rem;
+    height: 1px;
+    background-color: var(--ui-color-brand);
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-display;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--ui-color-text);
+  }
+
+  &__toggle-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--ui-color-border);
+    background: transparent;
+    color: var(--ui-color-text);
+    font: 600 0.72rem $font-mono;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-brand);
+    }
+  }
+
+  &__timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 2.5rem;
+  }
+
+  &__load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border: 1px solid var(--ui-color-border);
+    background: var(--ui-color-surface-alt);
+    color: var(--ui-color-text);
+    font: 600 0.75rem $font-mono;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-brand);
+    }
+  }
+}
