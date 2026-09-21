@@ -38,11 +38,21 @@
       </p>
 
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#proyectos">
+        <a
+          class="btn btn--primary"
+          href="#proyectos"
+          (click)="scrollToSection('proyectos', $event)"
+        >
           Ver proyectos
           <fa-icon icon="arrow-right" />
         </a>
-        <a class="btn btn--outline" href="#contacto">Contactar</a>
+        <a
+          class="btn btn--outline"
+          href="#contacto"
+          (click)="scrollToSection('contacto', $event)"
+        >
+          Contactar
+        </a>
       </div>
 
       @if (isAvailableForWork) {
