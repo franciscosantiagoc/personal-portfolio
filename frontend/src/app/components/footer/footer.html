@@ -1,0 +1,33 @@
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <!-- Logotipo / Monograma -->
+    <a
+      href="/"
+      class="footer__brand"
+      (click)="scrollToTop($event)"
+      aria-label="Francisco Santiago - Ir al inicio"
+    >
+      FS<span class="footer__brand-dot">.</span>
+    </a>
+
+    <!-- Copyright y rol profesional -->
+    <p class="footer__copy">
+      &copy; {{ currentYear }} Francisco Santiago — Frontend &amp; AEM Developer &middot; M&eacute;xico
+    </p>
+
+    <!-- Enlaces a perfiles sociales -->
+    <div class="footer__socials" aria-label="Redes profesionales">
+      @for (link of socialLinks; track link.label) {
+        <a
+          [href]="link.url"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="link.label + ' de Francisco Santiago (abre en nueva pestaña)'"
+        >
+          <fa-icon [icon]="link.icon" class="footer__social-icon" />
+        </a>
+      }
+    </div>
+  </div>
+</footer>
