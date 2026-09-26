@@ -34,13 +34,13 @@ export class Header implements OnInit {
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   // Secciones de la pagina de inicio (id de cada seccion)
-  // "Experiencia" agrupa trayectoria laboral + cursos y certificaciones
   // "Contacto" no esta en esta lista: ya tiene su propio boton CTA
   protected readonly navLinks: readonly NavLink[] = [
     { label: 'Inicio', id: 'inicio' },
     { label: 'Acerca de mi', id: 'acerca' },
     { label: 'Proyectos', id: 'proyectos' },
     { label: 'Experiencia', id: 'experiencia' },
+    { label: 'Cursos', id: 'cursos' },
   ];
 
   // Seccion actualmente activa en la visualizacion
