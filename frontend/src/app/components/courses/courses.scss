@@ -1,0 +1,345 @@
+@use 'abstracts' as *;
+
+// Contenedor general de la seccion cursos y certificaciones
+.courses {
+  border-bottom: 1px solid var(--ui-color-border);
+  background-color: var(--ui-color-surface);
+
+  &__inner {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 6rem 1.5rem;
+
+    @include respond('md') {
+      padding: 4rem 1.25rem;
+    }
+  }
+
+  &__header {
+    margin-bottom: 3rem;
+  }
+
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ui-color-brand);
+  }
+
+  &__eyebrow-line {
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background-color: var(--ui-color-brand);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    margin: 0 0 1rem;
+    font-family: $font-display;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    color: var(--ui-color-text);
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 44rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ui-color-text-secondary);
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--ui-color-border);
+
+    @include respond('md') {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__tab {
+    padding: 0.55rem 0.95rem;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border);
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ui-color-text-secondary);
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-text);
+    }
+
+    &--active {
+      background-color: var(--ui-color-brand);
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-text-inverse);
+
+      &:hover {
+        color: var(--ui-color-text-inverse);
+      }
+    }
+  }
+
+  // Agrupa el filtro de estado y el buscador para que
+  // el space-between de &__controls no los separe mal
+  &__controls-secondary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    @include respond('md') {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__status-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__status-filter-label {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ui-color-text-muted);
+    white-space: nowrap;
+  }
+
+  &__status-filter-select {
+    padding: 0.4rem 0.6rem;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border-strong);
+    color: var(--ui-color-text);
+    font-family: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--ui-color-brand);
+      box-shadow: 0 0 0 2px var(--ui-color-focus-ring);
+    }
+  }
+
+  &__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 280px;
+
+    @include respond('sm') {
+      min-width: 100%;
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    inset-inline-start: 0.85rem;
+    color: var(--ui-color-text-muted);
+    font-size: 0.75rem;
+    pointer-events: none;
+  }
+
+  &__search-input {
+    width: 100%;
+    padding: 0.55rem 2rem 0.55rem 2.2rem;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border-strong);
+    color: var(--ui-color-text);
+    font-family: inherit;
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.15s ease;
+
+    &::placeholder {
+      color: var(--ui-color-text-muted);
+      font-size: 0.76rem;
+    }
+
+    &:focus {
+      border-color: var(--ui-color-brand);
+      box-shadow: 0 0 0 2px var(--ui-color-focus-ring);
+    }
+  }
+
+  &__search-clear {
+    position: absolute;
+    inset-inline-end: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--ui-color-text-muted);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--ui-color-text);
+    }
+  }
+
+  &__result-count {
+    margin: 0 0 1.5rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ui-color-text-muted);
+  }
+
+  // Vitrina de cursos y certificaciones en grilla de tarjetas
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    @include respond('sm') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0 0 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--ui-color-border);
+
+    @include respond('sm') {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__page-size {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ui-color-text-muted);
+  }
+
+  &__page-size-label {
+    white-space: nowrap;
+  }
+
+  &__page-size-select {
+    padding: 0.35rem 0.5rem;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border-strong);
+    color: var(--ui-color-text);
+    font-family: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--ui-color-brand);
+      box-shadow: 0 0 0 2px var(--ui-color-focus-ring);
+    }
+  }
+
+  &__pager {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__pager-btn {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px solid var(--ui-color-border-strong);
+    color: var(--ui-color-text);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease,
+      opacity 0.15s ease;
+
+    &:hover:not(:disabled) {
+      border-color: var(--ui-color-brand);
+      color: var(--ui-color-brand);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__pager-status {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ui-color-text-muted);
+    white-space: nowrap;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 1rem;
+    text-align: center;
+    background-color: var(--ui-color-surface-alt);
+    border: 1px dashed var(--ui-color-border-strong);
+  }
+
+  &__empty-text {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ui-color-text-secondary);
+  }
+}
