@@ -3,13 +3,14 @@ import { Hero } from '../../components/hero/hero';
 import { About } from '../../components/about/about';
 import { Projects } from '../../components/projects/projects';
 import { ExperienceComponent } from '../../components/experience/experience';
+import { CoursesComponent } from '../../components/courses/courses';
 import { Seo } from '../../core/seo';
 
 // Pagina de inicio: compone las secciones
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Hero, About, Projects, ExperienceComponent],
+  imports: [Hero, About, Projects, ExperienceComponent, CoursesComponent],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
