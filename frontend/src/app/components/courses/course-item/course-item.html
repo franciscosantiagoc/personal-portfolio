@@ -1,0 +1,89 @@
+<article class="course-item" role="listitem">
+  <!-- Encabezado de tarjeta: icono de tipo y etiquetas -->
+  <div class="course-item__top">
+    <span
+      class="course-item__icon-badge"
+      [class.course-item__icon-badge--cert]="isCertification()"
+    >
+      <fa-icon
+        [icon]="['fas', isCertification() ? 'award' : 'graduation-cap']"
+      />
+    </span>
+
+    <div class="course-item__tags">
+      <span
+        class="course-item__type-tag"
+        [class.course-item__type-tag--cert]="isCertification()"
+      >
+        {{ isCertification() ? 'Certificación' : 'Curso' }}
+      </span>
+
+      @if (statusLabel()) {
+        <span
+          class="course-item__status-tag"
+          [class.course-item__status-tag--paused]="item().status === 'paused'"
+        >
+          {{ statusLabel() }}
+        </span>
+      }
+    </div>
+  </div>
+
+  <h3 class="course-item__role">{{ item().role }}</h3>
+
+  <div class="course-item__meta-row">
+    <span class="course-item__institution">{{ item().company }}</span>
+    <span class="course-item__separator" aria-hidden="true">·</span>
+    <time class="course-item__period">{{ item().period }}</time>
+  </div>
+
+  <p class="course-item__desc">{{ item().description }}</p>
+
+  <!-- Detalles adicionales: duracion y vigencia -->
+  @if (item().hours || item().expirationDate) {
+    <div class="course-item__details">
+      @if (item().hours) {
+        <span class="course-item__detail">
+          <fa-icon icon="calendar-days" />
+          {{ item().hours }} horas
+        </span>
+      }
+      @if (item().expirationDate) {
+        <span
+          class="course-item__detail"
+          [class.course-item__detail--expired]="isExpired()"
+        >
+          <fa-icon icon="certificate" />
+          {{ isExpired() ? 'Vencida' : 'Vigente hasta' }}
+          {{ item().expirationDate }}
+        </span>
+      }
+    </div>
+  }
+
+  <!-- Nube de tecnologias relacionadas -->
+  @if (item().technologies.length > 0) {
+    <div class="course-item__tech-list" aria-label="Tecnologias relacionadas">
+      @for (tech of item().technologies; track tech) {
+        <span class="course-item__tech-tag">{{ tech }}</span>
+      }
+    </div>
+  }
+
+  <!-- Verificacion de la credencial: link publico o ID -->
+  @if (item().credentialUrl) {
+    <a
+      [href]="item().credentialUrl"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="course-item__credential-link"
+    >
+      Ver credencial
+      <fa-icon icon="arrow-up-right-from-square" />
+    </a>
+  } @else if (item().credentialId) {
+    <p class="course-item__credential-id">
+      ID de la credencial: {{ item().credentialId }}
+    </p>
+  }
+</article>
