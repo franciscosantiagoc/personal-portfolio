@@ -4,3 +4,36 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Headers de seguridad para todo el sitio
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Cache largo e inmutable para bundles con hash (JS/CSS generados por Angular)
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Sin cache para el HTML, para que siempre se sirva la ultima version
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Fallback SPA: si una ruta del router de Angular no tiene pagina
+# prerenderizada, se sirve index.html y el router la resuelve en cliente
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

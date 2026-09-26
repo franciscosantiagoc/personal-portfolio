@@ -1,0 +1,66 @@
+<section id="experiencia" class="experience" aria-label="Trayectoria profesional">
+  <div class="experience__inner">
+    <!-- Encabezado de seccion con numeracion editorial -->
+    <header class="experience__header">
+      <div class="experience__header-titles">
+        <p class="experience__eyebrow">
+          <span class="experience__eyebrow-line"></span>
+          04 / Experiencia
+        </p>
+
+        <h2 class="experience__title">Trayectoria profesional</h2>
+      </div>
+
+      <!-- Control global para expandir o contraer detalles -->
+      <button
+        type="button"
+        class="experience__toggle-all"
+        (click)="toggleAll()"
+        [attr.aria-pressed]="areAllExpanded()"
+      >
+        <fa-icon
+          [icon]="['fas', areAllExpanded() ? 'chevron-up' : 'chevron-down']"
+          class="experience__toggle-all-icon"
+        />
+        <span>{{ areAllExpanded() ? 'Contraer todo' : 'Expandir todo' }}</span>
+      </button>
+    </header>
+
+    <!-- Lista cronologica con espina vertical -->
+    <div class="experience__timeline" role="list">
+      @for (item of visibleItems(); track item.id; let first = $first; let last = $last) {
+        <app-experience-item
+          [item]="item"
+          [isFirst]="first"
+          [isLast]="last"
+          [showMainProjects]="showMainProjects()"
+          [isExpanded]="isExpanded(item.id)"
+          (toggle)="toggleExpand(item.id)"
+        />
+      }
+    </div>
+
+    <!-- Boton ver mas cuando supera el limite de experiencias -->
+    @if (hasMoreItems()) {
+      <div class="experience__footer">
+        <button
+          type="button"
+          class="experience__load-more-btn"
+          (click)="toggleShowAll()"
+        >
+          <fa-icon
+            [icon]="['fas', isShowingAll() ? 'chevron-up' : 'chevron-down']"
+            class="experience__load-more-icon"
+          />
+          <span>
+            {{
+              isShowingAll()
+                ? 'Mostrar menos experiencias'
+                : 'Ver más experiencias (' + (items().length - defaultLimit) + ' más)'
+            }}
+          </span>
+        </button>
+      </div>
+    }
+  </div>
+</section>
