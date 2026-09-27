@@ -17,4 +17,11 @@ export interface Experience {
   readonly highlights?: readonly string[];
   readonly clientProjects?: readonly string[];
   readonly technologies: readonly string[];
+  // Campos exclusivos de type: 'course' | 'certification'
+  readonly credentialUrl?: string;
+  readonly credentialId?: string;
+  readonly expirationDate?: string;
+  readonly hours?: number;
+  // Estado del curso; sin valor se asume 'completed'
+  readonly status?: 'completed' | 'in-progress' | 'paused';
 }

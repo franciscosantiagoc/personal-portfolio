@@ -1,0 +1,157 @@
+<section id="cursos" class="courses" aria-label="Cursos y certificaciones">
+  <div class="courses__inner">
+    <!-- Encabezado de seccion con numeracion editorial -->
+    <div class="courses__header">
+      <p class="courses__eyebrow">
+        <span class="courses__eyebrow-line"></span>
+        05 / Cursos y certificaciones
+      </p>
+
+      <h2 class="courses__title">Cursos y certificaciones</h2>
+
+      <p class="courses__subtitle">
+        Formacion continua: cursos y certificaciones completados.
+      </p>
+    </div>
+
+    <!-- Barra de control: tipo y buscador reactivo -->
+    <div class="courses__controls">
+      <div class="courses__tabs" role="tablist">
+        @for (tab of typeTabs; track tab.id) {
+          <button
+            type="button"
+            class="courses__tab"
+            [class.courses__tab--active]="activeType() === tab.id"
+            (click)="selectType(tab.id)"
+            role="tab"
+            [attr.aria-selected]="activeType() === tab.id"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <div class="courses__controls-secondary">
+        @if (showStatusFilter()) {
+          <div class="courses__status-filter">
+            <label class="courses__status-filter-label" for="courses-status-filter">
+              Estado
+            </label>
+            <select
+              id="courses-status-filter"
+              class="courses__status-filter-select"
+              [value]="statusFilter()"
+              (change)="onStatusFilterChange($event)"
+            >
+              @for (option of statusFilterOptions; track option.id) {
+                <option [value]="option.id">{{ option.label }}</option>
+              }
+            </select>
+          </div>
+        }
+
+        <div class="courses__search">
+          <fa-icon class="courses__search-icon" icon="magnifying-glass" />
+          <input
+            type="search"
+            class="courses__search-input"
+            [value]="searchTerm()"
+            (input)="onSearchInput($event)"
+            placeholder="Buscar por nombre, institucion o tecnologia..."
+            aria-label="Buscar cursos y certificaciones"
+          />
+          @if (searchTerm()) {
+            <button
+              type="button"
+              class="courses__search-clear"
+              (click)="clearSearch()"
+              aria-label="Limpiar busqueda"
+            >
+              <fa-icon icon="xmark" />
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Region viva: anuncia el rango de resultados visible -->
+    <p class="courses__result-count" aria-live="polite">
+      @if (filteredCourses().length > 0) {
+        Mostrando {{ rangeStart() }}–{{ rangeEnd() }} de
+        {{ filteredCourses().length }}
+      } @else {
+        Mostrando 0 de {{ items().length }}
+      }
+    </p>
+
+    <!-- Grilla de tarjetas filtrada y paginada -->
+    @if (filteredCourses().length > 0) {
+      <div class="courses__grid" role="list">
+        @for (item of paginatedCourses(); track item.id) {
+          <app-course-item [item]="item" />
+        }
+      </div>
+
+      <!-- Controles de paginacion -->
+      <nav class="courses__pagination" aria-label="Paginacion de cursos">
+        <div class="courses__page-size">
+          <label class="courses__page-size-label" for="courses-page-size">
+            Mostrar
+          </label>
+          <select
+            id="courses-page-size"
+            class="courses__page-size-select"
+            [value]="pageSize()"
+            (change)="onPageSizeChange($event)"
+          >
+            @for (option of pageSizeOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+          <span class="courses__page-size-label">por pagina</span>
+        </div>
+
+        @if (hasPagination()) {
+          <div class="courses__pager">
+            <button
+              type="button"
+              class="courses__pager-btn"
+              (click)="goToPreviousPage()"
+              [disabled]="safeCurrentPage() === 1"
+              aria-label="Pagina anterior"
+            >
+              <fa-icon icon="arrow-left" />
+            </button>
+
+            <span class="courses__pager-status">
+              Pagina {{ safeCurrentPage() }} de {{ totalPages() }}
+            </span>
+
+            <button
+              type="button"
+              class="courses__pager-btn"
+              (click)="goToNextPage()"
+              [disabled]="safeCurrentPage() === totalPages()"
+              aria-label="Pagina siguiente"
+            >
+              <fa-icon icon="arrow-right" />
+            </button>
+          </div>
+        }
+      </nav>
+    } @else {
+      <div class="courses__empty">
+        <p class="courses__empty-text">
+          No se encontraron cursos ni certificaciones con estos filtros.
+        </p>
+        <button
+          type="button"
+          class="btn btn--secondary btn--sm"
+          (click)="resetFilters()"
+        >
+          Restablecer filtros
+        </button>
+      </div>
+    }
+  </div>
+</section>
